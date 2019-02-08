@@ -13,51 +13,52 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://discourse.hecdev.net/" target="_blank">Discourse</a>
+                    <a class="nav-link" href="https://www.hec.usace.army.mil/" target="_blank">HEC Website</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="col-md-4 full-height">
-        <div class="container">
-            <div class="row justify-content-md-left">
-                <div class="col-md-auto">
-                <a class="nav-link" href="preface.html">Preface</a>
+    <div  class="row full-height">
+        <div class="col-md-3 full-height">
+            <div class="container">
+                <div class="row justify-content-md-left">
+                    <div class="col-md-auto">
+                    <a class="nav-link" href="preface.html">Input Data Format</a>
+                    </div>
+                </div>
+                <div class="row justify-content-md-left">
+                    <div class="col-md-auto">
+                    <a class="nav-link" href="introduction.html">Navigating the User Interface</a>
+                    </div>
+                </div>
+                <div class="row justify-content-md-left">
+                    <div class="col-md-auto">
+                    <a class="nav-link" href="installation.html">Installing the SDI in HEC-WAT</a>
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-md-left">
-                <div class="col-md-auto">
-                <a class="nav-link" href="introduction.html">Introduction</a>
-                </div>
-            </div>
-            <div class="row justify-content-md-left">
-                <div class="col-md-auto">
-                <a class="nav-link" href="installation.html">Installing the SDI in HEC-WAT</a>
-                </div>
-            </div>
-            <div class="row justify-content-md-left">
-                <div class="col-md-auto">
-                <a class="nav-link" href="overview.html">Overview</a>
-                </div>
+        </div>
+        <div class="col-md-9 full-height">
+            <div class="container">
+                <br>
+                <br>
+                <br>
+                <p>
+                    The Stochastic Data Import tool (SDI) facilitates incorporating externally generated data into an HEC-WAT FRA compute. The SDI increases the flexibility of HEC-WAT FRA computes by giving greater control to the user over generation of event data. This plug-in performs two critical functions within the FRA compute; it creates DataLocations so that other plug-ins in the program order can consume the input data supplied to the SDI, and it defines the event sequence within a lifecycle.
+                </p>
+                <br>
+                <p>
+                    These functions require specific data formatting of the input data provided to the SDI. This document seeks to explain the required data formats, and how those formats influence the behavior of the SDI – and ultimately the FRA compute.
+                </p>
+                <br>
+                <span><strong>Background</strong></span>
+                <p>
+                    A simulation using the HEC-WAT FRA compute style has a specific structure. The simulation contains many realizations, each realization contains many lifecycles, and each lifecycle contains events. Lifecycles typically span multiple years, and there is typically one event per year within a lifecycle. In the current version of HEC-WAT, models do not maintain awareness of parameter states from one event to another. This structure is strictly enforced within the FRA compute style. This structure also facilitates the separation of Natural Variability and Knowledge Uncertainty. The FRA compute style convention expects that parameters represented by distributions containing primarily Knowledge Uncertainty are sampled one time per realization. That result is used throughout all events in the realization. Natural Variabilities are sampled within each event. This separation of Natural Variability and Knowledge Uncertainty is a convention, and is not strictly enforced by HEC-WAT, however, it is strongly advised that the data provided to the SDI meets this sampling convention.
+                </p>
             </div>
         </div>
     </div>
-    <div class="col-md-8 full-height">
-            <div class="container">
-                    <p>
-                        The Stochastic Data Import tool (SDI) facilitates incorporating externally generated data into an HEC-WAT FRA compute. The SDI increases the flexibility of HEC-WAT FRA computes by giving greater control to the user over generation of event data. This plug-in performs two critical functions within the FRA compute; it creates DataLocations so that other plug-ins in the program order can consume the input data supplied to the SDI, and it defines the event sequence within a lifecycle.
-                    </p>
-                    <br>
-                    <p>
-                        These functions require specific data formatting of the input data provided to the SDI. This document seeks to explain the required data formats, and how those formats influence the behavior of the SDI – and ultimately the FRA compute.
-                    </p>
-                    <br>
-                    <span><strong>Background</strong></span>
-                    <p>
-                        A simulation using the HEC-WAT FRA compute style has a specific structure. The simulation contains many realizations, each realization contains many lifecycles, and each lifecycle contains events. Lifecycles typically span multiple years, and there is typically one event per year within a lifecycle. In the current version of HEC-WAT, models do not maintain awareness of parameter states from one event to another. This structure is strictly enforced within the FRA compute style. This structure also facilitates the separation of Natural Variability and Knowledge Uncertainty. The FRA compute style convention expects that parameters represented by distributions containing primarily Knowledge Uncertainty are sampled one time per realization. That result is used throughout all events in the realization. Natural Variabilities are sampled within each event. This separation of Natural Variability and Knowledge Uncertainty is a convention, and is not strictly enforced by HEC-WAT, however, it is strongly advised that the data provided to the SDI meets this sampling convention.
-                    </p>
-            </div>
-        </div>
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="/css/bootstrap/js/bootstrap.min.js"></script>
 </body>
