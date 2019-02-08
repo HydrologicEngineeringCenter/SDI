@@ -6,19 +6,20 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Stochastic Data Import Tool (SDI)</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                  <a class="nav-link" href="index.html">Home</a>
-              </li>
-          </ul>
-      </div>
-    </nav>
-  <div class="col-md-4 full-height">
+    <a class="navbar-brand" href="#">Stochastic Data Import Tool (SDI)</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+  <div>
+    <div class="col-md-3 full-height">
       <div class="container">
         <div class="row justify-content-md-left">
           <div class="col-md-auto">
@@ -31,12 +32,39 @@
           </div>
         </div>
         <div class="row justify-content-md-left">
-            <div class="col-md-auto">
-              <a class="nav-link" href="#issues">Common Issues</a>
-            </div>
+          <div class="col-md-auto">
+            <a class="nav-link" href="#issues">Common Issues</a>
           </div>
+        </div>
       </div>
+    </div>
+    <div class="col-md-9 full-height">
+      <div class="container">
+        <br>
+        <br>
+        <span id="intro"><strong>Input Data Format</strong></span>
+        <br>
+        <p>
+          The SDI import data format relies on HEC-DSS (DSS6) Time Series Collections. A collection represents a series of arrays of Y values representing the data for a consistent array of times. In the SDI format, each Y array represents a lifecycle of events. Within the SDI, for a given location and parameter type, a collection represents a series of lifecycles each containing a series of events. 
+        </p>
+        <br>
+        <span id="format"><strong>Data Format</strong></span>
+        <br>
+        <p>
+          The user is able to import many different data locations into the SDI. Each data location is represented by a time series collection. DataLocations differ by changing the A/B/C/ parts. By convention, A and B define a location, and C defines a parameter. The SDI simply copies the provided data from the input DSS file to the appropriate lifecycle DSS file within the runs directory at run time. This means whatever A/B/C/ parts are provided by the input data will be utilized by any program linking to this input from the SDI. Some programs rely heavily on conventions for how A/B/C are defined, and so to ensure success, review any conventions for the models that will be consuming the provided data when making selections on how to structure the input data A/B/C parts.
+          Within the SDI the user declares one of the locations imported as the primary location. This location is used within the compute to govern how event time-windows are described.          
+        </p>
+        <br>
+        <p>
+          The SDI has options on how to define events. The most standard way is to have one event per year within a lifecycle. Within the SDI the user is able to select the start date of the year, the SDI then processes the first collection member of the user-defined primary data location to break the data into year-sized chunks of data. Next, the SDI shortens the chunks to find the range with continuous non-null data. It uses this range to define the event time window within that year. To artificially increase the length of an event beyond the range of non-null data, zeros can be inserted. This is useful in cases where the time window needs to be lengthened to allow for routing of the event through the system. In cases where zero is an unacceptable value, consider using a different record (that allows for zero values) as the primary, or construct a hypothetical record that is used as the primary to define the event window, and not linked to any model as a data source. The SDI then collects the event time window for each year of the lifecycle.  These define the event time windows for all data locations supplied by the SDI, and all programs within the program order within an FRA simulation. 
+          Realizations, as defined above in the Background section, contain many lifecycles. Since the SDI requires each data location to be a collection, and each collection member to represent a lifecycle, the notion of a realization is only represented through logical groupings of collection members. If the input data has 20 collection members, a user can group this data as four groups of realizations with five lifecycles per realization, or as five realizations with four lifecycles each. There is no signal available to define how the input data is organized for realizations, so it is up to the responsibility of the program creating the input data to be consistent in the management of realization sampling and the communication of how many lifecycles are expected per realization.  This information is input in the definition of the simulation within HEC-WAT (not within the SDI, although the SDI has validation checks it can perform to ensure the data would support different combinations of lifecycles per realizations etc.)    
+        </p>
+        <br>
+        <span id="issues"><strong>Common Issues</strong></span>
+      </div>
+    </div>  
   </div>
+
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="/css/bootstrap/js/bootstrap.min.js"></script>
 </body>
