@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://discourse.hecdev.net/c/wat">Discourse</a>
+            </li>
         </ul>
     </div>
   </nav>
@@ -45,14 +48,20 @@
         <span id="intro"><strong>Input Data Format</strong></span>
         <br>
         <p>
-          The SDI import data format relies on HEC-DSS (DSS6) Time Series Collections. A collection represents a series of arrays of Y values representing the data for a consistent array of times. In the SDI format, each Y array represents a lifecycle of events. Within the SDI, for a given location and parameter type, a collection represents a series of lifecycles each containing a series of events. 
+          The SDI import data format relies on HEC-DSS (DSS6) Time Series Collections. A collection represents a series of arrays of Y values representing the data for a consistent array of times. 
+        </p>
+        <p>
+          In the SDI format, each Y array (collection member) represents a <b>lifecycle</b> of events across the entire time window of the Analysis period. Events within a collection member are determined by water year, calendar year, a user provided date, or the presence of null data (if the proper -d flags are used).
+        </p>
+        <p>
+          Within the SDI, for a given location and parameter type, a collection represents a series of lifecycles each containing a series of events. 
         </p>
         <br>
         <span id="format"><strong>Data Format</strong></span>
         <br>
         <p>
           The user is able to import many different data locations into the SDI. Each data location is represented by a time series collection. DataLocations differ by changing the A/B/C/ parts. By convention, A and B define a location, and C defines a parameter. The SDI simply copies the provided data from the input DSS file to the appropriate lifecycle DSS file within the runs directory at run time. This means whatever A/B/C/ parts are provided by the input data will be utilized by any program linking to this input from the SDI. Some programs rely heavily on conventions for how A/B/C are defined, and so to ensure success, review any conventions for the models that will be consuming the provided data when making selections on how to structure the input data A/B/C parts.
-          Within the SDI the user declares one of the locations imported as the primary location. This location is used within the compute to govern how event time-windows are described.          
+          Within the SDI the user declares one of the locations imported as the primary location. This location is used within the compute to govern what event time-windows are created.          
         </p>
         <br>
         <p>
