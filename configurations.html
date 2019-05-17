@@ -45,9 +45,11 @@
         <p>
           The SDI allows for configuration of the user interface and computational properties through the use of -d flags.
           <br>
-          -DSDI.MultiYearComputeOffsetEnabled=true
-          -DSDI.HasMultiYearEvent=true
-          skip validation flag... 
+            <ol>
+                <li>-DSDI.MultiYearComputeOffsetEnabled=true</li>
+                <li>-DSDI.HasMultiYearEvent=true</li>
+                <li>-DSDI.MultiYearComputeValidationEnabled=false</li>
+          </ol>
         </p>
         <br>
         <span id="multiYearEvent"><strong>Multi Year Event Flag</strong></span>
@@ -58,6 +60,10 @@
         </p>
         <br>
         <span id="multiYearComputeOffset"><strong>Multi Year compute offset</strong></span>
+        <p>This flag will prevent sdi from shifting data from the originally stated date and time in the sdi input data.</p>
+                <br>
+        <span id="MultiYearComputeValidationEnabled"><strong>DSDI.MultiYearComputeValidationEnabled</strong></span>
+        <p>This flag will prevent sdi from the sdi input data. Use with caution</p>
       </div>
     </div> 
   </div>
